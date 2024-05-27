@@ -130,6 +130,7 @@ def calculate_centroid_distance(dict_ground_truth, dict_pred):
                             'pred_category': pred_feature['category'],
                             'distance': distance,
                             'pred_score': pred_feature['score'],
+                            'pred_feature': pred_feature,
                         })
             
             # Sort the eligible predictions first by descending pred_score, then by ascending distance
@@ -139,6 +140,9 @@ def calculate_centroid_distance(dict_ground_truth, dict_pred):
             if eligible_predictions:
                 best_match = eligible_predictions[0]  # The best match for this gt_feature
                 results_dict[gt_geojson].append(best_match)
+
+                # Remove the matched prediction to ensure it is not reused
+                pred_structure[match_key].remove(best_match['pred_feature'])
     
     return results_dict
 
