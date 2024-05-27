@@ -3,3 +3,4 @@ output
 .idea
 debug.log
 __pycache__
+checkpoints
